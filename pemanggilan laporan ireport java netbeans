@@ -8,7 +8,7 @@
             Connection con = (Connection) DriverManager.getConnection(host, user, pass);
             com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) con;
             String reportSource = System.getProperty("user.dir") + "/src/nama laporan.jrxml";
-            reportDest = System.getProperty("user.dir") + "/src/"+param+".jasper"; 
+            reportDest = System.getProperty("user.dir") + "/src/nama laporan.jasper"; 
             JasperReport jasperReport = JasperCompileManager.compileReport(reportSource);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,c);
             JasperExportManager.exportReportToHtmlFile(jasperPrint, reportDest);
