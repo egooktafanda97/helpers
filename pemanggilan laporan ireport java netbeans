@@ -1,0 +1,18 @@
+ String reportDest = null;
+        Map<String, Object>parameter = new HashMap<String, Object>();          
+         try{
+             String dbname = "apl_desa",
+                    host = "jdbc:mysql://localhost/"+dbname,
+                    user ="root",
+                    pass ="";
+            Connection con = (Connection) DriverManager.getConnection(host, user, pass);
+            com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) con;
+            String reportSource = System.getProperty("user.dir") + "/src/nama laporan.jrxml";
+            reportDest = System.getProperty("user.dir") + "/src/"+param+".jasper"; 
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportSource);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,c);
+            JasperExportManager.exportReportToHtmlFile(jasperPrint, reportDest);
+            JasperViewer.viewReport(jasperPrint,false);
+        }catch(Exception e){
+            System.out.println(e);
+        } 
