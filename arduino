@@ -1,0 +1,13 @@
+int pompa=2;
+void setup(){
+ Serial.begin(9600); 
+ pinMode(pompa,OUTPUT);
+}
+
+void loop(){
+  int sensorValue = analogRead(A0);
+  Serial.println(sensorValue);
+  if(sensorValue<420) digitalWrite(pompa,LOW);
+  else if(sensorValue>420) digitalWrite(pompa,HIGH);
+  delay(100);
+}
