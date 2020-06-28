@@ -1,36 +1,123 @@
-<div class="row">
-	<div style="width: 100%; height: 50px; background-color: magenta;"></div>
-</div>
-<div class="container">
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Data NIlai</title>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+<style>
+
+	.isi{
+			width: 100%;
+			height: 10px;
+		}
+	.radio-inline{
+		display: inline-block;
+
+	}
+	.radio-inline{
+		margin-left: 10px;
+	}
+
+
+
+
+</style>
+</head>
+<body>
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-4">
-			<h4>Form Input</h4>
-		<div class="panel panel-default">
-		  <div class="panel-body">
-
-		  	<!-- ko form ma -->
-		  	<form>
-		  	<!-- Siko input masuan-->
-			</form>
-
-
-		  </div>
-		</div>		
-
-		
-		</div>
+        
+        
+        
+        <form>
+				
+			<div class="form-group">
+					<label>Nama :</label>
+					<input type="" class="form-control" name="">
+				</div>
+				<div class="form-group">
+					<label>Alamat :</label>
+					<input type="" class="form-control" name="">
+				</div>
+				<div class="form-group">
+					<label>Jenis Kelamin</label>
+					<br>
+					<div class="radio-inline">
+						<label><input type="radio"   name="Pria"  >pria</label>
+					</div>
+					
+					<div class="radio-inline">
+					<label><input type="radio"   name="Wanita"  >Wanita</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Nilai Tugas 1 :</label>
+					<input type="" class="form-control" name="">
+				</div>
+				<div class="form-group">
+					<label>Quis 1 :</label>
+					<input type="" class="form-control" name="">
+				</div>
+				<div class="form-group">
+					<label>Nilai Uts:</label>
+					<input type="" class="form-control" name="">
+				</div>
+				<div class="form-group">
+					<label>Nilai Tugas 2:</label>
+					<input type="" class="form-control" name="">
+				</div>
+				<div class="form-group">
+					<label>Quis 2:</label>
+					<input type="" class="form-control" name="">
+				</div>
+				<div class="form-group">
+					<label>Uas:</label>
+					<input type="" class="form-control" name="">
+				</div>
+		</form>
+        
+        
+        
+        </div>
 		<div class="col-md-8">
-		
-		<div class="panel panel-default">
-			<h4>Tebl Data</h4>
-		  <div class="panel-body">
-		  	
-		  	<!-- isi table siko -->
-
-		  </div>
+        
+        <table class="table">
+				<thead>
+					<tr>
+						<td>Nama</td>
+						<td>alamat</td>
+						<td>JK</td>
+						<td>TUgas1</td>
+						<td>Quis1</td>
+						<td>UTs</td>
+						<td>TUgas2</td>
+						<td>Quis2</td>
+						<td>Uas</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Ego Oktafanda</td>
+						<td>p</td>
+						<td>L</td>
+						<td>Ego Oktafanda</td>
+						<td>p</td>
+						<td>L</td>
+						<td>Ego Oktafanda</td>
+						<td>p</td>
+						<td>L</td>
+					</tr>
+					</tbody>
+			</table>
+        
+			
 		</div>
+    </div>
+        
 
-		
-		</div>
-	</div>
-</div>
+
+
+
+<script src="bootstrap/js/jquery-3.2.1.slim.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script> </body>
+</html>
