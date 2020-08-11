@@ -1,0 +1,498 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 11 Agu 2020 pada 17.31
+-- Versi server: 10.1.36-MariaDB
+-- Versi PHP: 7.3.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `dtb_penyuluh`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `nama` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`, `nama`) VALUES
+(2, 'admin', '$2y$10$XskgX6Ey0ekFKtZB5uFel.7H8apuWK9MouKQQlTdai8.atmQvZJP2', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `akun_penyuluh`
+--
+
+CREATE TABLE `akun_penyuluh` (
+  `id_akun` int(10) UNSIGNED NOT NULL,
+  `id_penyuluh` bigint(20) NOT NULL,
+  `username` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `akun_penyuluh`
+--
+
+INSERT INTO `akun_penyuluh` (`id_akun`, `id_penyuluh`, `username`, `password`, `created_at`, `updated_at`) VALUES
+(8, 2, 'egifurwanda', '$2y$10$6L7rdiRMS42RWYOKfqytge/cjw6WFlP02GOoSj8Hsjp.9rhNRTLdm', '2020-07-13 16:28:07', '2020-07-13 16:28:07'),
+(9, 1, 'egooktafanda97', '$2y$10$JPIGyt5oDZZHrqxrQx0N0ufRrJMYLNv1zYcGGyfHzcdetC5OD0vxG', '2020-07-13 16:58:08', '2020-07-13 16:58:08');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `anggota_kelompok_tani`
+--
+
+CREATE TABLE `anggota_kelompok_tani` (
+  `id_anggota` int(10) UNSIGNED NOT NULL,
+  `id_kelompok` int(11) NOT NULL,
+  `id_petani` bigint(20) NOT NULL,
+  `masuk_anggota` date NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `anggota_kelompok_tani`
+--
+
+INSERT INTO `anggota_kelompok_tani` (`id_anggota`, `id_kelompok`, `id_petani`, `masuk_anggota`, `status`, `created_at`, `updated_at`) VALUES
+(4, 1, 8, '2020-07-16', 'Aktif', '2020-07-16 15:44:27', '2020-07-16 15:44:27');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `data_penyuluh`
+--
+
+CREATE TABLE `data_penyuluh` (
+  `id_penyuluh` int(10) UNSIGNED NOT NULL,
+  `nik` int(11) NOT NULL,
+  `nama` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jekel` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_hp` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tempat_lahir` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tgl_lahir` date NOT NULL,
+  `agama` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `data_penyuluh`
+--
+
+INSERT INTO `data_penyuluh` (`id_penyuluh`, `nik`, `nama`, `jekel`, `no_hp`, `tempat_lahir`, `tgl_lahir`, `agama`, `alamat`, `status`, `created_at`, `updated_at`) VALUES
+(1, 123121331, 'ego oktafanda', 'perempuan', '082284733404', 'sungailangsat', '1997-10-30', 'Islam', 'sungailangsat,pasar,06,00', 'active', '2020-07-11 12:17:23', '2020-07-13 13:17:59'),
+(2, 868676, 'egi', 'perempuan', '082284733404', 'sungailangsat', '2002-10-30', 'Islam', 'sungailangsat,pasar,06,00', 'active', '2020-07-12 19:26:51', '2020-07-13 13:17:40');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kelompok_tani`
+--
+
+CREATE TABLE `kelompok_tani` (
+  `id_kelompoktani` bigint(20) UNSIGNED NOT NULL,
+  `id_penyuluh` bigint(20) NOT NULL,
+  `nama_kelompok` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_ketua` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_wilayah` bigint(20) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `kelompok_tani`
+--
+
+INSERT INTO `kelompok_tani` (`id_kelompoktani`, `id_penyuluh`, `nama_kelompok`, `nama_ketua`, `id_wilayah`, `created_at`, `updated_at`) VALUES
+(1, 1, 'harapan baru', 'ego oktafanda', 1, '2020-07-11 13:08:22', '2020-07-11 13:08:22'),
+(2, 1, 'sikjok', 'sunan', 2, '2020-07-16 14:10:15', '2020-07-16 14:10:15'),
+(3, 2, 'suka makmur', 'adi', 5, '2020-07-19 12:05:11', '2020-07-19 12:05:11'),
+(4, 2, 'lol', 'ads', 5, '2020-08-05 00:58:33', '2020-08-05 00:58:33'),
+(5, 1, 'k', 'm', 6, '2020-08-11 04:02:33', '2020-08-11 04:02:33');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kunjunganmasal`
+--
+
+CREATE TABLE `kunjunganmasal` (
+  `id_kunjungan_masal` int(10) UNSIGNED NOT NULL,
+  `id_penyuluh` int(11) NOT NULL,
+  `id_wilayah` bigint(20) NOT NULL,
+  `tanggal` date NOT NULL,
+  `waktu` time NOT NULL,
+  `tempat` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_pokta` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mode` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat_tambahan` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `topik` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `masalah` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pemecah` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `laki_laki` int(11) NOT NULL,
+  `perampuan` int(11) NOT NULL,
+  `status` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `imgs` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `kunjunganmasal`
+--
+
+INSERT INTO `kunjunganmasal` (`id_kunjungan_masal`, `id_penyuluh`, `id_wilayah`, `tanggal`, `waktu`, `tempat`, `nama_pokta`, `mode`, `alamat_tambahan`, `topik`, `masalah`, `pemecah`, `laki_laki`, `perampuan`, `status`, `imgs`, `created_at`, `updated_at`) VALUES
+(2, 1, 1, '2020-08-13', '00:58:00', 'ug', 'ops', 'Rapat', 'jh', '1', '3', '11', 88, 0, '-', 'image_1596995975.jpg', '2020-08-09 10:59:35', '2020-08-10 06:40:35'),
+(3, 1, 1, '2020-08-13', '00:58:00', 'ug', 'jhu', 'Rapat', 'jh', '2', '2', '22', 88, 0, '-', 'image_1596996085.jpg', '2020-08-09 11:01:25', '2020-08-09 11:01:25'),
+(4, 1, 1, '2020-07-01', '00:58:00', 'ug', 'jhu', 'Rapat', 'jh', '3', '1', '33', 88, 0, '-', 'image_1597002033.jpg', '2020-08-09 11:01:37', '2020-08-09 12:40:33'),
+(5, 1, 6, '2020-08-05', '04:20:00', 'klnl', 'kjhk', 'Demca', 'kml', 'kjk', 'kjnk', 'kjn', 100, 50, '-', 'image_1597094465.jpg', '2020-08-10 14:21:05', '2020-08-10 14:21:05');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kunjungan_kel_tani`
+--
+
+CREATE TABLE `kunjungan_kel_tani` (
+  `id_kunjungan` int(10) UNSIGNED NOT NULL,
+  `id_kelompoktani` bigint(20) NOT NULL,
+  `id_penyuluh` int(11) NOT NULL,
+  `id_wilayah` bigint(20) NOT NULL,
+  `tempat` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tanggal` date NOT NULL,
+  `waktu` time NOT NULL,
+  `alamat_tambahan` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `topik` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `masalah` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pemecah` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `laki_laki` int(11) NOT NULL,
+  `perampuan` int(11) NOT NULL,
+  `status` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `imgs` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `kunjungan_kel_tani`
+--
+
+INSERT INTO `kunjungan_kel_tani` (`id_kunjungan`, `id_kelompoktani`, `id_penyuluh`, `id_wilayah`, `tempat`, `tanggal`, `waktu`, `alamat_tambahan`, `topik`, `masalah`, `pemecah`, `laki_laki`, `perampuan`, `status`, `imgs`, `created_at`, `updated_at`) VALUES
+(4, 1, 1, 1, 'balai desa', '2020-07-01', '18:00:00', 'klkl', 'kkk', 'ppp', 'nnn', 11, 30, 'selesai', 'image_1597086692.jpg', '2020-07-17 17:45:08', '2020-07-17 17:45:08'),
+(8, 1, 1, 1, 'tes', '2020-08-14', '11:17:00', 'sm', ',dsjf', 'skdf', 'ksdl', 4, 4, 'selesai', 'image_1596946754.jpg', '2020-08-08 21:17:45', '2020-08-08 21:17:45');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kunjungan_petani`
+--
+
+CREATE TABLE `kunjungan_petani` (
+  `id_kunjungan_petani` int(10) UNSIGNED NOT NULL,
+  `id_penyuluh` bigint(20) NOT NULL,
+  `id_petani` bigint(20) NOT NULL,
+  `id_wilayah` bigint(20) NOT NULL,
+  `tanggal` date NOT NULL,
+  `waktu` time NOT NULL,
+  `alamat_tambahan` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `topik` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `masalah` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pemecah` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `img` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `kunjungan_petani`
+--
+
+INSERT INTO `kunjungan_petani` (`id_kunjungan_petani`, `id_penyuluh`, `id_petani`, `id_wilayah`, `tanggal`, `waktu`, `alamat_tambahan`, `topik`, `masalah`, `pemecah`, `status`, `img`, `created_at`, `updated_at`) VALUES
+(4, 1, 9, 1, '2020-07-16', '01:52:00', 'sjf', 'jagung', 'jsf', 'sjgf', 'success', '', '2020-07-19 11:52:53', '2020-07-19 11:59:05'),
+(5, 1, 10, 6, '2020-07-30', '16:59:00', 'nonLabel', 'sawit', 'blas', 'bla', 'success', 'image_1597067697.jpg', '2020-07-19 12:00:11', '2020-08-10 06:54:57'),
+(6, 1, 8, 1, '2020-09-05', '20:47:00', 'hdsfj', 'sdjsdj', 'sdkjfdskj', 'sdojsdfj', 'success', 'image_1596980895.jpg', '2020-08-09 06:48:15', '2020-08-09 06:48:15');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2020_07_08_182420_tb_petani', 1),
+(2, '2020_07_09_203833_create_data_penyuluhs_table', 1),
+(3, '2020_07_10_154929_create_kelompok_tanis_table', 1),
+(4, '2020_07_11_163144_create_akun_penyuluhs_table', 1),
+(5, '2020_07_11_174532_create_wilayahs_table', 1),
+(6, '2020_07_11_181242_create_anggota_kelompok_tanis_table', 1),
+(7, '2020_07_11_181757_create_kunjungan_kel_tanis_table', 2),
+(8, '2020_07_11_205105_create_kunjungan_petani_table', 3),
+(9, '2014_10_12_100000_create_password_resets_table', 4),
+(10, '2020_08_09_141056_kunjungan_masal', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `petani`
+--
+
+CREATE TABLE `petani` (
+  `id_petani` int(10) UNSIGNED NOT NULL,
+  `nik` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tempat_lahir` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tgl_lahir` date NOT NULL,
+  `jekel` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_hp` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_wilayah` bigint(20) NOT NULL,
+  `alamat` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `j_tani` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `petani`
+--
+
+INSERT INTO `petani` (`id_petani`, `nik`, `nama`, `tempat_lahir`, `tgl_lahir`, `jekel`, `no_hp`, `id_wilayah`, `alamat`, `j_tani`, `status`, `created_at`, `updated_at`) VALUES
+(7, '34629634', 'ego oktafanda', 'skdf', '2020-07-16', 'laki-laki', '9842', 5, 'dsjh', 'sdkjf', 'active', '2020-07-14 11:30:59', '2020-07-14 11:30:59'),
+(8, '28374682764', 'egi', 'dsjhbcjs', '2020-07-09', 'laki-laki', '35983', 1, 'djsfhsk', 'kdsfjks', 'active', '2020-07-16 12:46:26', '2020-07-16 12:46:26'),
+(9, '32864892', 'tiara', 'sbdfks', '2020-07-22', 'laki-laki', '79238', 1, 'jsdfbsk', 'cbfs', 'active', '2020-07-16 12:54:44', '2020-07-16 12:54:44'),
+(10, '4239', 'panji', 'sdfk', '2020-07-30', 'laki-laki', '2837469', 6, 'bsjdkh', 'kelapa sawit', 'active', '2020-07-17 19:05:32', '2020-07-17 19:05:32'),
+(11, '78679', 'jgkb', 'ugi', '2020-07-24', 'laki-laki', '98689', 6, 'kjk', 'jhhjj', 'active', '2020-07-21 01:47:36', '2020-07-21 01:47:36');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `wilayah`
+--
+
+CREATE TABLE `wilayah` (
+  `id_wilayah` int(10) UNSIGNED NOT NULL,
+  `id_penyuluh` bigint(20) NOT NULL,
+  `nama_desa` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_dusun` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `desc` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `wilayah`
+--
+
+INSERT INTO `wilayah` (`id_wilayah`, `id_penyuluh`, `nama_desa`, `nama_dusun`, `desc`, `created_at`, `updated_at`) VALUES
+(1, 1, 'sungailngsat langsat', 'koto', 'Rt/01', '2020-07-11 12:44:10', '2020-07-11 12:46:38'),
+(5, 2, 'kasang', 'gemurai', 'rt 08', '2020-07-13 13:57:54', '2020-07-13 15:01:33'),
+(6, 1, 'kresek', 'jbjb', 'hgfhgv', '2020-07-13 18:46:32', '2020-07-13 18:46:32');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `akun_penyuluh`
+--
+ALTER TABLE `akun_penyuluh`
+  ADD PRIMARY KEY (`id_akun`),
+  ADD UNIQUE KEY `akun_penyuluh_username_unique` (`username`);
+
+--
+-- Indeks untuk tabel `anggota_kelompok_tani`
+--
+ALTER TABLE `anggota_kelompok_tani`
+  ADD PRIMARY KEY (`id_anggota`);
+
+--
+-- Indeks untuk tabel `data_penyuluh`
+--
+ALTER TABLE `data_penyuluh`
+  ADD PRIMARY KEY (`id_penyuluh`);
+
+--
+-- Indeks untuk tabel `kelompok_tani`
+--
+ALTER TABLE `kelompok_tani`
+  ADD PRIMARY KEY (`id_kelompoktani`);
+
+--
+-- Indeks untuk tabel `kunjunganmasal`
+--
+ALTER TABLE `kunjunganmasal`
+  ADD PRIMARY KEY (`id_kunjungan_masal`);
+
+--
+-- Indeks untuk tabel `kunjungan_kel_tani`
+--
+ALTER TABLE `kunjungan_kel_tani`
+  ADD PRIMARY KEY (`id_kunjungan`);
+
+--
+-- Indeks untuk tabel `kunjungan_petani`
+--
+ALTER TABLE `kunjungan_petani`
+  ADD PRIMARY KEY (`id_kunjungan_petani`);
+
+--
+-- Indeks untuk tabel `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indeks untuk tabel `petani`
+--
+ALTER TABLE `petani`
+  ADD PRIMARY KEY (`id_petani`);
+
+--
+-- Indeks untuk tabel `wilayah`
+--
+ALTER TABLE `wilayah`
+  ADD PRIMARY KEY (`id_wilayah`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `akun_penyuluh`
+--
+ALTER TABLE `akun_penyuluh`
+  MODIFY `id_akun` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `anggota_kelompok_tani`
+--
+ALTER TABLE `anggota_kelompok_tani`
+  MODIFY `id_anggota` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `data_penyuluh`
+--
+ALTER TABLE `data_penyuluh`
+  MODIFY `id_penyuluh` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `kelompok_tani`
+--
+ALTER TABLE `kelompok_tani`
+  MODIFY `id_kelompoktani` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `kunjunganmasal`
+--
+ALTER TABLE `kunjunganmasal`
+  MODIFY `id_kunjungan_masal` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `kunjungan_kel_tani`
+--
+ALTER TABLE `kunjungan_kel_tani`
+  MODIFY `id_kunjungan` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT untuk tabel `kunjungan_petani`
+--
+ALTER TABLE `kunjungan_petani`
+  MODIFY `id_kunjungan_petani` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT untuk tabel `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT untuk tabel `petani`
+--
+ALTER TABLE `petani`
+  MODIFY `id_petani` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT untuk tabel `wilayah`
+--
+ALTER TABLE `wilayah`
+  MODIFY `id_wilayah` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
