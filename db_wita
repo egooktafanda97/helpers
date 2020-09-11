@@ -1,0 +1,155 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 11 Sep 2020 pada 16.31
+-- Versi server: 10.1.36-MariaDB
+-- Versi PHP: 7.3.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `sk_silatpangean`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `belajar`
+--
+
+CREATE TABLE `belajar` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `image` varchar(200) NOT NULL,
+  `vidio` varchar(200) NOT NULL,
+  `keterangan` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `belajar`
+--
+
+INSERT INTO `belajar` (`id`, `nama`, `image`, `vidio`, `keterangan`) VALUES
+(1, 'Langka Ompek', 'tes.jpg', 'langka4.mp4', 'Silat Pangean (Dialek Kuantan: Silek Pangean) adalah salah satu seni bela diri yang berasal dari Kecamatan Pangean, Kabupaten Kuantan Singingi, Provinsi Riau. Seni bela diri ini masuk dalam kategori silat yang diwariskan secara turun temurun. Bagi ahli seni bela diri, silat pangean dikenal karena gerakannya yang lembut dan gemulai tapi mematikan sehingga silat ini diminati di Riau. Selain untuk beladiri, silat ini juga ditampilkan dalam acara pernikahan Melayu Riau di Siak.[1][2][3][4]');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `laman`
+--
+
+CREATE TABLE `laman` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `image` varchar(200) NOT NULL,
+  `keterangan` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `laman`
+--
+
+INSERT INTO `laman` (`id`, `nama`, `image`, `keterangan`) VALUES
+(1, 'Laman Koto', '1.jpg', 'hhhhhhhhhhhhhh'),
+(2, 'laman pulau kumpai', '2.png', 'bla laman pulkum');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pergelaran`
+--
+
+CREATE TABLE `pergelaran` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `tahun` date NOT NULL,
+  `keterangan` longtext NOT NULL,
+  `vidio` varchar(100) NOT NULL,
+  `foto` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pergelaran`
+--
+
+INSERT INTO `pergelaran` (`id`, `nama`, `tahun`, `keterangan`, `vidio`, `foto`) VALUES
+(1, 'pergelaran Rutinitas', '2020-09-07', 'laman koto pangean', 'v1.mp4', '1.jpg'),
+(2, 'pergelaran Rutinitas', '2020-09-20', 'laman koto pangean', 'v2.mp4', '2.png');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `sejarah`
+--
+
+CREATE TABLE `sejarah` (
+  `id` int(11) NOT NULL,
+  `Sejarah` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `sejarah`
+--
+
+INSERT INTO `sejarah` (`id`, `Sejarah`) VALUES
+(0, '<p><strong>RADARPEKANBARU.COM</strong>- Lain padang lain ilalang, lain lubuk lain pula ikannya, artinya setiap daerah tentu akan berbeda-beda bahasa, adat, budaya, dan kebiasaannya.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Seperti di salah satu daerah di Provinsi Riau, tradisi Silat Pangean tak pernah lekang oleh hujan dan tak pernah luntur oleh panas, dan selalu mentradisi, menjadi kekhasan daerah itu.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Atraksi Silat Pangean (silat perempuan asal muasal nama silat itu, red.) tetap digelar saat Idul Fitri hari pertama. Pada pukul 14.00 WIB digelar atraksi akbar Silat Pangean di Koto Tinggi Pangean, yang dihadiri berbagai pesilat satu perguruan mulai dari peserta asal 12 kabupaten dan kota di Provinsi Riau, Amerika Serikat, China, Malaysia. Mereka dari luar negeri sengaja berkunjung ke tempat itu untuk terlibat dalam tradisi akbar tersebut.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> \"Setiap 1 Syawal, Hari Raya Idul Fitri, Silat Pangean ditampilkan di negeri asalnya, Pangean. Di laman silat, lintas generasi menampilkan Silat Pangean ini. Ada silat tangan, silat pedang, dan silat perisai. Dan ditutup dengan silat Kopuang Barompek,\" kata penggiat tradisi Silat Pangean, Mardianto Manan, di Pekanbaru, Minggu.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Menurut Mardianto yang juga dosen Universitas Islam Riau itu, Silat Pangean diberi nama demikian berasal dari sebuah kisah seorang suami di Desa Koto Tinggi, Kabupaten Kuantan Singingi, yang pamit kepada isterinya untuk pergi ke Minangkabau, Sumatera Barat, guna menimba ilmu \"kanuragan\", silat.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Sang isteri yang ditinggal pun saat itu bermimpi mendapat hidayah dan dilatih belajar ilmu silat. Ketika suaminya pulang, dia pun bertanya, sejauh mana kepandaian yang diperolehnya. Selanjutnya dia pun menawarkan untuk menguji ilmu kepandaian sang suami.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Suaminya bisa dikalahkan dengan ilmu silat dimiliki sang istri yang diperoleh dalam mimpi. Dengan takjub, si suami meminta agar&nbsp; diajari ilmu Silat Perempuan tersebut.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> \"Maka untuk selanjutnya silat dari perempuan itu dipopulerkan secara turun temurun sejak ratusan tahun lalu dikenal dengan Silat Pangean,\" katanya.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Sebelum atraksi silat digelar, usai shoaat zuhur atau sekitar pukul 13.00 WIB, pangulu, para datuk, para pendekar, para guru, serta sebagian anak murid silat melakukan ziarah ke pondam atau tempat makam sejumlah guru silat, para jawara di Ujuang Taye, Desa Koto Tinggi Pangean.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Di pondam, kemenyan dibakar, doa pun diucap penuh khusyuk. Puluhan pendekar itu bermohon kepada Sang Pencipta supaya Silat Pangean yang dikenal suci lagi menyucikan yang tengah digeluti sang pendekar, diberkahi dunia dan akhirat.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Sekitar 30 menit waktu dihabiskan di pondam. Sebagian dari peziarah ada yang membawa pasir dan tanah dari atas pondam para pendekar yang telah menghadap-Nya, dan sebagian lagi ada yang membawa bebatuan yang ada di atas makam itu. Konon benda-benda tersebut diyakini diberi kekuatan oleh Allah SWT.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Usai ziarah, prosesi silat di negeri asalnya ini terus dilakukan, setelah sebelumnya makan bersama di Rumah Godang Suku Melayu, yang jaraknya paling dekat dengan pondam.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Selanjutnya, atraksi akbar Silat Pangean&nbsp; digelar di halaman Masjid Jamik, yakni masjid tertua di Koto Tinggi Pangean. Dalam sasana itu semua orang, laki-laki, perempuan, tua muda dari berbagai suku dan negara berkumpul dan saling memperkuat silaturahim.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Murid dari berbagai laman silat se-Pangean telah siap untuk uji kemahiran menguasai teknik permainan dan pergelutan silat. Mereka yang melakukan ziarah pun tiba di laman. Mereka duduk bak layak pendekar di balai \"bauputui\" yang telah dibangun sejak ratusan tahun lalu.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Permainan silat diawali dari anak remaja. Satu per satu mereka dipanggil berurutan dan berpasangan untuk mempermainkan silat tangan. Disusul dengan permainan silat pedang dan silat perisai yang dimainkan orang dewasa.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Sebelum tampil, sembah sujud kepada pangulu dan para guru terlebih dahulu harus mereka haturkan. Kemudian di tengah laman, saat hendak memulai permainan silat, pesilat wajib sujud seraya berdoa memohon agar selamat dalam permainan silat.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Prosesi pelaksanaan Silat Pangean di negeri asalnya itu pun ditutup dengan silat \"Kopuang Barompek\". Seorang guru dikepung dan diserang oleh 4 muridnya. Namun, sang guru tidak jatuh dan rusak, malahan keempat anak muridnya itulah yang dibuat terjatuh ke tanah.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Acara berlangsung hingga saat magrib. Secara turun temurun tradisi ini terus lestari diwarisi sejak ratusan tahun silam.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Silat Pangean bersumber yang dari ajaran Al Quran itu merupakan ilham dari Allah SWT kepada manusia. Silat itu telah dikenal di mana-mana dan bahkan berkembang di luar negeri. Silat tersebut, antara lain dikenal di Siak, Kampar, Pelalawan, dan seluruh perwakilan Silat Pangean sampai luar negeri, seperti Malaysia dan ke Amerika Serikat.<br /> <br /> &nbsp;&nbsp; &nbsp;<br /> <strong>Suci</strong><br /> &nbsp;&nbsp; &nbsp;<br /> Setiap penampilan Silat Pangean yang khusyuk mengundang tepuk tangan bergemuruh dari penonton setelah para pesilat memainkan jurus-jurusnya.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Mardianto optimistis tradisi itu takkan hilang tertelan zaman. Setiap 1 Syawal, silat yang mengalir di setiap gerakan dan nafas orang Pangean itu sesuai aturan dimainkan di hadapan khalayak ramai dan diikuti seluruh perguruan silat.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Silat Pangean digelar di negeri asalnya setiap 1 Syawal. Silat itu dianggap suci dan harus dihelat setiap Idul Fitri. Setelah digelar 1 Syawal di Pangean, perguruan Silat Pangean lainnya yang berada di luar daerah itu dipersilakan memainkan silat tersebut mulai 2 Syawal hingga seterusnya.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Silat Pangean ini terlahir dalam diri manusia yang suci, jauh dari perpecahan dan permusuhan. Silat Pangean membawa misi yang suci pula, penuh dengan kebaikan dan kebenaran, membawa hakikat merajut silaturahim. Pada hari yang fitri, Silat Pangean digelar sebagai upaya menyatukan seluruh masyarakat.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Salah seorang pemuka masyarakat Pangean yang juga seorang guru Silat Pangean, Nayarlis, mengatakan bahwa silat itu tidak bisa dikotori dengan hal-hal yang merusak persatuan dan kesatuan di tengah masyarakat.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Ia meyakini jika ada pihak yang mencoba menyalahgunakan silat ini, akan ada bala menimpanya.<br /> <br /> <strong>&nbsp;&nbsp; &nbsp;</strong><strong><br /> Sejarah &nbsp;<br /> &nbsp;&nbsp; &nbsp;</strong><br /> Berdasarkan sejarah, sekitar 1500 Masehi pada masa Raja Paku Alam II, Kerajaan Pagar Ruyung masih memeluk agama Hindu. Kerajaan Pagar Ruyung adalah kerajaan di Minang Kabau yang terbesar dan terkenal pada masanya.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Pada suatu masa, datanglah penyiar agama Islam dari Persia ke tanah Pagar Ruyung. Dia bernama Syech Burhanudin.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Agama Islam yang dibawa oleh Syech Burhanudin awalnya ditolak oleh pihak kerajaan dan masyarakat, tetapi Syech Burhanudin selalu melakukan pendekatan-pendekatan terhadap masyarakat Minang Kabau, baik melalui budaya lokal maupun kunjungan dari rumah ke rumah.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Syech Burhanudin menyebarkan agama Islam tidak sendiri, tetapi dia dibantu oleh murid-muridnya. Malin nan Putiah merupakan murid Syech Burhanudin yang cukup terkenal.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Dalam adat Minang Kabau, istri raja atau permaisuri disebut dengan Bundo Kanduang. Adik kandung perempuan dari Bundo Kanduang bernama Bundo Panjago Adat dan suami dari Bundo Panjago Adat bernama Datuak Panjago Nagori.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Oleh karena Bundo Kanduang tidak memiliki keturunan dengan Raja Paku Alam II maka dia mengangkat anak dari anak Bundo Panjago Adat. Anak tersebut bernama Siti Hasimah. Siti Hasimah dibesarkan dalam lingkungan relegius dan adat istiadat Minang Kabau.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Siti Hasimah mempunyai guru mengaji bernama Malin nan Putiah. Kemudian hari, Malin nan Putiah memperisitri Siti Hasimah. Perkawinan mereka melahirkan tiga keturunan atau pangeran.&nbsp; Anak pertamanya diberi nama Ahmad, anak kedua Syarif, dan anak ketiga Ali.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Siti Hasimah belajar silat melalui mimpi. Hal itu didapatkannya karena Penerapan Adat Basandi Syarak, Syarak Basandi Kitabullah, dan nilai-nilai relegius diamalkannya disertai rajin membaca kitab suci Al Quran dan melaksanakan ibadah shalat wajib dan shalat malam.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Dalam sapaan kependekarannya, Siti Hasimah bernama Inyiak Simah atau Olang Bagegah. Ia mempunyai dua saudara kandung, Siti Fatimah dan Siti Halimah, serta satu saudara angkat, Ismail, bergelar Datuak Bolang.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Kekacauan yang terjadi dalam Kerajaan Pagar Ruyuang maka Inyiak Simah pergi merantau ke hilir daerah Minang Kabau untuk menyebarkan agama Islam.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Tiga putranya dititipkan kepada pamannya, yaitu Datuak Bolang. Mereka sekaligus belajar ilmu beladiri atau silat pada Sang Datuak.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Pada akhir petualangan Inyiak Simah, ia singgah di negeri di salah satu daerah aliran Sungai Kuantan yang belum bernama.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Oleh karena belum ada nama, maka Inyiak Simah memberi nama daerah tersebut sebagai Pangean, terinspirasi daerah asal orang tuanya, Pangian di Lintau. Dari sinilah dikenal asal muasal nama Pangean dan Silat Pangean yang dikenal itu.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Negeri itu berada di wilayah Kabupaten Kuantan Singingi, Provinsi Riau, tempat Inyiak Simah menetap. Beberapa tahun Inyiak Simah merantau membuat Malin nan Putiah gelisah.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Ia kemudian mengutus Datuak Bolang serta ketiga anaknya untuk mencari Inyiak Simah. Akhirnya Inyiak Simah bertemu dengan Datuak Bolang, Ahmad, Syarif, dan Ali di negeri Pangean. Di Pangean, Inyiak Simah dan anak-anaknya menyusun kekuatan dan mengajarkan Silat Pangean.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Datuak Malin nan Putiah akhirnya menyusul mencari Inyiak Simah dan anak-anaknya dengan melalui Sungai Batang Kuantan. Pencarian Datuak Malin nan Putiah tak sia-sia. Dia menemukan anak dan istrinya di Pangean. Datuak Malin nan Putiah membujuk istrinya untuk pulang ke Pagar Ruyung tetapi ditolak oleh istrinya karena sudah merasa kerasan dan tenteram hidup di daerah baru tersebut (Pangean, red.).<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Pada akhirnya terjadi pertengkaran antara Inyiak Simah dan Datuak Malin nan Putiah. Sebelum berkelahi mereka mengadakan perjanjian yaitu jika Inyiak Simah kalah maka ia harus bersedia pulang ke Pagar Ruyung dan sebaliknya. Di dalam perkelahian itu terucaplah beberapa petuah oleh Inyiak Simah.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> \"Somuik bah iriang tah pijak indak mati alu tah aruang patah tigo, makan abih-abih manyuruak hilang-hilang, ompek ganjial limo gonok\" begitu ucapaan Inyiak.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Makna petuah itu selain dalam juga memiliki nilai spritual dalam Silat Pangean.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Pertempuran dimenangkan oleh Inyiak Simah sehingga Malin nan Putiah akhirnya mengikuti keinginan Inyiak Simah menetap di Pangean.<br /> <br /> <strong>&nbsp;&nbsp; &nbsp;</strong><strong><br /> Turun temurun<br /> &nbsp;&nbsp; &nbsp;</strong><br /> Tanah Pangean sangat terkenal dengan persilatan. Pangean tak asing bagi pesilat di Kuantan. Silat Pangean diwariskan secara turun temurun. Silat Pangean diajarkan kepada anak dan kemenakan.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Dalam gerakan, Silat Pangean dikenal dengan gerak lembut dan gemulai. Walau begitu, setiap gerakan menyimpan efek mematikan. Aliran Silat Pangean terdiri atas dua jenis, yaitu Pangean Bathino, langsung diwariskan oleh Inyiak Simah dan Pangean Jantan, diwariskan Datuak Bolang.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Gerakan Pangean Jantan sedikit kasar dan untuk perang atau pasukan terdepan dalam siasat perang adat Pangean. Terkadang Pangean Jantan banyak disalahgunakan oleh pesilat Pangean ke tabiat negatif.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Gerakan Silat Pangean Bathino lemah gemulai dan lunak diperuntukan bagi pangeran-pangeran kerajaan atau keturunan raja. Aliran Silat Pangean Bathino dikenal dengan nama khas sebagai ilmu Pangean Kebathinan.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Silat Pangean Jantan berasal dari Lintau yang diwariskan oleh Datuak Bolang, sedangkan Pangean Bathino berasal dari Pangean, salah satu daerah tepian batang Kuantan sebelah hilir, kini menjadi kecamatan di Kabupaten Kuantan Singingi, Provinsi Riau.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Kini, untuk mencapai tujuan pengembangan silat dalam rangka melestarikan kebudayaan masyarakat Pangean, penghulu adat membuka laman silat di samping Masjid Koto Tinggi Pangean.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Sebuah bukit di Pangean yang bernama Bukit Sangkar Puyuh sekarang disebut Koto Tinggi Pangean. Nama bukit ini diambil dari bentuknya yang memang seperti Sangkar Burung Puyuh. Di sini sebuah balai adat didirikan.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Selain itu, dalam rangka pemerataan keterampilan silat, para guru Silat Pangean memberi izin untuk dibukanya laman silat di masing-masing banjar (suku).<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Dalam penerapannya, Silat Pangean terdiri atas permainan dan pergelutan. Tarian silat sambut-menyambut serangan ini sering dimainkan di halaman.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Hal itu berbeda dalam pengajaran silat kepada murid tingkat atas yang dilakukan di rumah. Silat di dalam rumah ini disebut dengan Silat Pangean Kebathinan.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> \"Seiring berjalannya waktu Silat Pangean mendapat perhatian yang luas. Tidak hanya di rantau Kuantan, tapi mulai dikenal di Indragiri dan daerah Riau lainnya. Bahkan pengaruh Silat Pangean juga tumbuh di luar negeri, seperti di Malaysia, Singapura, dan Pathani Thailand,\" katanya.<br /> <br /> <strong>&nbsp;&nbsp; &nbsp;</strong><strong><br /> Pelestarian</strong><br /> &nbsp;&nbsp; &nbsp;<br /> Upaya pelestarian terus berlangsung tanpa pemaksaan, ditandai dengan tradisi yang kuat antarsesama anggota silat saat bertemu. Mereka saling mengucapkan salam kompak dan terus memperkuat silaturahim.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Untuk melesatarikannya, yang paling penting silat diwariskan oleh orang muslim dan laki-lakinya sudah bersunat, kecuali orang asing yang sudah masuk Islam.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Ilmu bela diri Silat Pangean tidak boleh diterapkan dengan cara-cara yang emosi, karena ilmu ini bisa berbalik arah ke diri sendiri.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> \"Kesombongan diri akan mengalahkan ilmu yang dimiliki itu, karena di atas langit akan ada langit,\" kata Mardianto.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> Kini hanya sedikit kendala dalam upaya pelestarian tradisi ini ke generasi muda karena terhambat dengan kemajuan teknologi informasi, di mana sebagian generasi muda cenderung menghabiskan waktu bermain \"game\", tidak tertarik mewarisi tradisi Silat Pangean.<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br /> \"Tidak menjadi persoalan sampai kapan pun pengikut setia tetap melestarikannya, terbukti setiap 1 Syawal tradisi ini terus digelar,\" katanya. (ant)</p>');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `belajar`
+--
+ALTER TABLE `belajar`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `laman`
+--
+ALTER TABLE `laman`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `pergelaran`
+--
+ALTER TABLE `pergelaran`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `belajar`
+--
+ALTER TABLE `belajar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `laman`
+--
+ALTER TABLE `laman`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `pergelaran`
+--
+ALTER TABLE `pergelaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
