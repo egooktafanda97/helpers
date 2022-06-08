@@ -1,0 +1,157 @@
+ /*
+  RDM6300-125KHz-RFID
+  modified on 20 Jan 2020
+  by Amir Mohammad Shojaee @ Electropeak
+  Home
+
+  based on www.mschoeffler.de Arduino Examples
+*/
+#include <SPI.h>
+#include <SoftwareSerial.h>
+
+#include <UIPEthernet.h>
+
+//ethernet
+EthernetClient client;
+uint8_t mac[6] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
+char server[] = "192.168.100.56";
+
+//rfid
+const int BUFFER_SIZE = 14; // RFID DATA FRAME FORMAT: 1byte head (value: 2), 10byte data (2byte version + 8byte tag), 2byte checksum, 1byte tail (value: 3)
+const int DATA_SIZE = 10; // 10byte data (2byte version + 8byte tag)
+const int DATA_VERSION_SIZE = 2; // 2byte version (actual meaning of these two bytes may vary)
+const int DATA_TAG_SIZE = 8; // 8byte tag
+const int CHECKSUM_SIZE = 2; // 2byte checksum
+
+SoftwareSerial ssrfid = SoftwareSerial(6,8); 
+
+uint8_t buffer[BUFFER_SIZE]; // used to store an incoming data frame 
+int buffer_index = 0;
+long rfid_kode = 0;
+
+bool scanner = false;
+
+// notif 
+bool notif = false;
+void setup() {
+ Serial.begin(9600); 
+ ssrfid.begin(9600);
+ ssrfid.listen(); 
+ pinMode(4, OUTPUT); // merah
+ pinMode(5, OUTPUT); // merah notif
+ pinMode(7, OUTPUT); // buzer
+ pinMode(2, OUTPUT); // hijau
+ pinMode(3, OUTPUT); // kuning
+ 
+// ethernet set
+  
+  if(Ethernet.begin(mac) == 0){
+    Serial.println("Failed to configure Ethernet using DHCP");
+    while(1);
+  }else{
+    Serial.println("Connect");
+    digitalWrite(2, HIGH);
+  }
+}
+
+void loop() {
+  if (ssrfid.available() > 0){
+    bool call_extract_tag = false;
+    
+    int ssvalue = ssrfid.read(); // read 
+    if (ssvalue == -1) { // no data was read
+      return;
+    }
+
+    if (ssvalue == 2) { // RDM630/RDM6300 found a tag => tag incoming 
+      buffer_index = 0;
+    } else if (ssvalue == 3) { // tag has been fully transmitted       
+      call_extract_tag = true; // extract tag at the end of the function call
+    }
+
+    if (buffer_index >= BUFFER_SIZE) { // checking for a buffer overflow (It's very unlikely that an buffer overflow comes up!)
+      Serial.println("Error: Buffer overflow detected! ");
+      return;
+    }
+    
+    buffer[buffer_index++] = ssvalue; // everything is alright => copy current value to buffer
+    if (call_extract_tag == true) {
+      
+      if (buffer_index == BUFFER_SIZE) {
+         long tag = extract_tag();
+         digitalWrite(5, LOW);
+         if(rfid_kode != tag){
+               digitalWrite(7, HIGH);
+               delay(100);
+               digitalWrite(7, LOW);
+               digitalWrite(4, HIGH);
+               
+               digitalWrite(3, LOW);
+               scanner = false;
+               rfid_kode = tag;
+               Serial.print(tag);
+               Serial.print("\n");
+               String data = "kode=";
+              data += tag;
+              if (client.connect(server,8080)){
+                Serial.println("Connected to server");
+                client.println("POST /arduino_test/Welcome/index HTTP/1.1");
+                client.println("Host: 192.168.100.56:8080");
+                client.println("Content-Type: application/x-www-form-urlencoded");
+                client.print("Content-Length: ");
+                client.println(data.length());
+                client.println();
+                client.println(data);
+                client.println();
+
+                while(client.connected()){
+                  if(client.available()){
+                    char c = client.read();
+                    Serial.print(c);  
+                    digitalWrite(4, LOW);
+                    digitalWrite(3, HIGH);
+                  }
+                }
+              }else{
+                  rfid_kode = "";
+                  digitalWrite(5, HIGH);
+                  Serial.println("Connection to server failed");
+                  digitalWrite(4, LOW);
+              }
+          }else{
+             digitalWrite(5, HIGH);
+//             delay(100);
+             digitalWrite(5, LOW);
+             scanner = true;
+          }
+      } else { // something is wrong... start again looking for preamble (value: 2)
+        digitalWrite(5, HIGH);
+        delay(100);
+        digitalWrite(5, LOW);
+        buffer_index = 0;
+        return;
+      }
+    }    
+  }
+}
+
+long extract_tag() {
+    uint8_t msg_head = buffer[0];
+    uint8_t *msg_data = buffer + 1; // 10 byte => data contains 2byte version + 8byte tag
+    uint8_t *msg_data_version = msg_data;
+    uint8_t *msg_data_tag = msg_data + 2;
+    long tag = hexstr_to_value(msg_data_tag, DATA_TAG_SIZE);
+    return tag;
+}
+
+
+
+long hexstr_to_value(char *str, unsigned int length) { // converts a hexadecimal value (encoded as ASCII string) to a numeric value
+  char* copy = malloc((sizeof(char) * length) + 1); 
+  memcpy(copy, str, sizeof(char) * length);
+  copy[length] = '\0'; 
+  // the variable "copy" is a copy of the parameter "str". "copy" has an additional '\0' element to make sure that "str" is null-terminated.
+  long value = strtol(copy, NULL, 16);  // strtol converts a null-terminated string to a long value
+  free(copy); // clean up 
+  return value;
+}
