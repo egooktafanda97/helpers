@@ -1,11 +1,3 @@
- /*
-  RDM6300-125KHz-RFID
-  modified on 20 Jan 2020
-  by Amir Mohammad Shojaee @ Electropeak
-  Home
-
-  based on www.mschoeffler.de Arduino Examples
-*/
 #include <SPI.h>
 #include <SoftwareSerial.h>
 
@@ -14,7 +6,7 @@
 //ethernet
 EthernetClient client;
 uint8_t mac[6] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
-char server[] = "192.168.100.56";
+char server[] = "192.168.100.14";
 
 //rfid
 const int BUFFER_SIZE = 14; // RFID DATA FRAME FORMAT: 1byte head (value: 2), 10byte data (2byte version + 8byte tag), 2byte checksum, 1byte tail (value: 3)
@@ -93,22 +85,25 @@ void loop() {
                Serial.print("\n");
                String data = "kode=";
               data += tag;
-              if (client.connect(server,8080)){
+              if (client.connect(server,80)){
                 Serial.println("Connected to server");
-                client.println("POST /arduino_test/Welcome/index HTTP/1.1");
-                client.println("Host: 192.168.100.56:8080");
+                client.println("POST /phoenix/devabsen/rest/api/absensi HTTP/1.1");
+                client.println("Host: 192.168.100.14");
                 client.println("Content-Type: application/x-www-form-urlencoded");
                 client.print("Content-Length: ");
                 client.println(data.length());
                 client.println();
                 client.println(data);
                 client.println();
-
+                Serial.print("============= \n");
+                String result;
+                result = "";
                 while(client.connected()){
                   if(client.available()){
                     char c = client.read();
-                    Serial.print(c);  
+                    result += (char)c;
                     digitalWrite(4, LOW);
+                    Serial.print(c);
                     digitalWrite(3, HIGH);
                   }
                 }
@@ -120,8 +115,10 @@ void loop() {
               }
           }else{
              digitalWrite(5, HIGH);
+             digitalWrite(7, HIGH);
 //             delay(100);
              digitalWrite(5, LOW);
+             digitalWrite(7, LOW);
              scanner = true;
           }
       } else { // something is wrong... start again looking for preamble (value: 2)
