@@ -1,3 +1,4 @@
+
 #include <SPI.h>
 #include <SoftwareSerial.h>
 
@@ -6,7 +7,7 @@
 //ethernet
 EthernetClient client;
 uint8_t mac[6] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
-char server[] = "192.168.100.14";
+char server[] = "192.168.100.240";
 
 //rfid
 const int BUFFER_SIZE = 14; // RFID DATA FRAME FORMAT: 1byte head (value: 2), 10byte data (2byte version + 8byte tag), 2byte checksum, 1byte tail (value: 3)
@@ -43,12 +44,16 @@ void setup() {
   }else{
     Serial.println("Connect");
     digitalWrite(2, HIGH);
+    digitalWrite(7, HIGH);
+    delay(100);
+    digitalWrite(7, LOW);
   }
 }
 
 void loop() {
   if (ssrfid.available() > 0){
     bool call_extract_tag = false;
+    Serial.print("ok")
     
     int ssvalue = ssrfid.read(); // read 
     if (ssvalue == -1) { // no data was read
@@ -87,8 +92,8 @@ void loop() {
               data += tag;
               if (client.connect(server,80)){
                 Serial.println("Connected to server");
-                client.println("POST /phoenix/devabsen/rest/api/absensi HTTP/1.1");
-                client.println("Host: 192.168.100.14");
+                client.println("POST /absensi/rest/api/absensi HTTP/1.1");
+                client.println("Host: 192.168.100.240");
                 client.println("Content-Type: application/x-www-form-urlencoded");
                 client.print("Content-Length: ");
                 client.println(data.length());
